@@ -1,14 +1,13 @@
 /* WORD LADDER Main.java
  * EE422C Project 3 submission by
  * Replace <...> with your actual data.
- * <Student1 Name>
- * <Student1 EID>
- * <Student1 5-digit Unique No.>
+ * Jose Camacho
+ * jac6493
  * <Student2 Name>
  * <Student2 EID>
  * <Student2 5-digit Unique No.>
  * Slip days used: <0>
- * Git URL:
+ * Git URL: https://github.com/josecamacho8/EE422C/tree/master/Project/Project_3
  * Summer 2017
  */
 
@@ -20,9 +19,6 @@ import java.io.*;
 public class Main {
 
 	// static variables and constants only here.
-
-
-
 
 	public static void main(String[] args) throws Exception {
 
@@ -65,7 +61,6 @@ public class Main {
 		}
 
 		int i = input.indexOf(' ');
-
 		parsed.add(input.substring(0, i));
 		parsed.add(input.substring(i + 1, input.length()));
 
@@ -73,13 +68,11 @@ public class Main {
 	}
 
 	public static ArrayList<String> getWordLadderDFS(String start, String end) {
-
-
 		// Returned list should be ordered start 5to end.  Include start and end.
 		// If ladder is empty, return list with just start and end.
 		Set<String> dict = makeDictionary();
 		Helper test = new Helper(dict);
-		
+
 		ArrayList<String> ladder = new ArrayList<String>();
 		if(test.dfsHelper(start,  end, ladder)){
 			ladder.add(start);
@@ -102,9 +95,14 @@ public class Main {
 
 
 	public static void printLadder(ArrayList<String> ladder) {
-		System.out.println("a " + ladder.size() + "-rung word ladder exists between " + ladder.get(0) + " and " + ladder.get(ladder.size() - 1) + ".");
-		for(int i = 0; i < ladder.size(); i++){
-			System.out.println(ladder.get(i));
+		if(ladder.size() == 2){
+			System.out.println("no word ladder can be found between " + ladder.get(0) + " and " + ladder.get(1) + ".");
+		}
+		else{
+			System.out.println("a " + ladder.size() + "-rung word ladder exists between " + ladder.get(0) + " and " + ladder.get(ladder.size() - 1) + ".");
+			for(int i = 0; i < ladder.size(); i++){
+				System.out.println(ladder.get(i));
+			}
 		}
 	}
 

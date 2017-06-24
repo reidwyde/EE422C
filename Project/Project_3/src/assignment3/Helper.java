@@ -9,7 +9,6 @@ public class Helper {
 	ArrayList<String> dfspath;
 	Set<String> dict; //need to make lower case
 
-
 	public Helper(Set<String> dictionary){
 		visited = new HashSet<String>();
 		bfspath = new ArrayList<Node>();
@@ -31,8 +30,6 @@ public class Helper {
 		return false;
 	}
 
-//Need to toLower everything
-//Adds everything except the root into ladder
 	public boolean dfsHelper(String root, String end, ArrayList<String> ladder){
 		if(root.toLowerCase().equals(end.toLowerCase())){
 			return true;
@@ -61,15 +58,6 @@ public class Helper {
 		}
 		return false;
 	}
-
-
-
-	public void reset(){
-		visited.clear();
-		dfspath.clear();
-		bfspath.clear();
-	}
-
 
 	class Node{
 		String name;
