@@ -40,6 +40,16 @@ public class Helper {
 
 		visited.add(root.toLowerCase());
 		for(String s : dict){
+			if(isOneOff(root.toLowerCase(), s.toLowerCase()) && isOneOff(s.toLowerCase(), end.toLowerCase())){
+				if(!visited.contains(s.toLowerCase())){
+					if(dfsHelper(s, end, ladder)){
+						ladder.add(s.toLowerCase());
+						return true;
+					}
+				}
+			}
+		}
+		for(String s : dict){
 			if(isOneOff(root.toLowerCase(), s.toLowerCase())){
 				if(!visited.contains(s.toLowerCase())){
 					if(dfsHelper(s, end, ladder)){
