@@ -31,19 +31,19 @@ public class Helper {
 		return false;
 	}
 
-	
+//Need to toLower everything
+//Adds everything except the root into ladder
 	public boolean dfsHelper(String root, String end, ArrayList<String> ladder){
-		if(root.equals(end)){
-			ladder.add(end);
+		if(root.toLowerCase().equals(end.toLowerCase())){
 			return true;
 		}
 
-		visited.add(root);
+		visited.add(root.toLowerCase());
 		for(String s : dict){
-			if(isOneOff(root, s)){
-				if(!visited.contains(s)){
+			if(isOneOff(root.toLowerCase(), s.toLowerCase())){
+				if(!visited.contains(s.toLowerCase())){
 					if(dfsHelper(s, end, ladder)){
-						ladder.add(s);
+						ladder.add(s.toLowerCase());
 						return true;
 					}
 				}

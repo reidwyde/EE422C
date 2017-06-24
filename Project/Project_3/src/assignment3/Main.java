@@ -20,9 +20,9 @@ import java.io.*;
 public class Main {
 
 	// static variables and constants only here.
-	
 
-	
+
+
 
 	public static void main(String[] args) throws Exception {
 
@@ -38,11 +38,13 @@ public class Main {
 			ps = System.out;			// default output to Stdout
 		}
 		initialize();
-		printLadder(parse(kb));
+		ArrayList<String> input;
+		input = parse(kb);
+		printLadder(getWordLadderDFS(input.get(0), input.get(1)));
 	}
 
 	public static void initialize() {
-		
+
 
 		// initialize your static variables or constants here.
 		// We will call this method before running our JUNIT tests.  So call it 
@@ -55,41 +57,52 @@ public class Main {
 	 * If command is /quit, return empty ArrayList. 
 	 */
 	public static ArrayList<String> parse(Scanner keyboard) {
-		if(keyboard.next().equals("/quit")){
-			return null;
-		}
 		ArrayList<String> parsed = new ArrayList<String>();
 		String input = keyboard.nextLine();
-		for(int i = 0; i < input.length(); i++){
-			if(input.charAt(i) == ' '){
-				parsed.add(input.substring(0, i - 1));
-				parsed.add(input.substring(i + 1, input.length() - 1));
-			}
+
+		if(input.equals("/quit")){
+			return null;
 		}
+
+		int i = input.indexOf(' ');
+
+		parsed.add(input.substring(0, i));
+		parsed.add(input.substring(i + 1, input.length()));
+
 		return parsed;
 	}
 
 	public static ArrayList<String> getWordLadderDFS(String start, String end) {
-		
+
 
 		// Returned list should be ordered start 5to end.  Include start and end.
 		// If ladder is empty, return list with just start and end.
 		Set<String> dict = makeDictionary();
-
-		return null; // replace this line later with real return
+		Helper test = new Helper(dict);
+		
+		ArrayList<String> ladder = new ArrayList<String>();
+		if(test.dfsHelper(start,  end, ladder)){
+			ladder.add(start);
+		} 
+		else{
+			ladder.add(start);
+			ladder.add(end);
+		}
+		Collections.reverse(ladder);
+		return ladder;
 	}
 
 	public static ArrayList<String> getWordLadderBFS(String start, String end) {
 
 		Set<String> dict = makeDictionary();
-		
+
 
 		return null; // replace this line later with real return
 	}
 
 
 	public static void printLadder(ArrayList<String> ladder) {
-		System.out.println("?");
+		System.out.println("a " + ladder.size() + "-rung word ladder exists between " + ladder.get(0) + " and " + ladder.get(ladder.size() - 1) + ".");
 		for(int i = 0; i < ladder.size(); i++){
 			System.out.println(ladder.get(i));
 		}
