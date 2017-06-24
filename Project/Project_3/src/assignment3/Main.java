@@ -78,8 +78,8 @@ public class Main {
 			ladder.add(start);
 		} 
 		else{
-			ladder.add(start);
 			ladder.add(end);
+			ladder.add(start);
 		}
 		Collections.reverse(ladder);
 		return ladder;
