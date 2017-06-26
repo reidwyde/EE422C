@@ -3,8 +3,8 @@
  * Replace <...> with your actual data.
  * Jose Camacho
  * jac6493
- * <Student2 Name>
- * <Student2 EID>
+ * Reid Wyde
+ * raw3295
  * <Student2 5-digit Unique No.>
  * Slip days used: <0>
  * Git URL: https://github.com/josecamacho8/EE422C/tree/master/Project/Project_3
@@ -16,12 +16,14 @@ package assignment3;
 import java.util.*;
 import java.io.*;
 
+
 public class Main {
 
 	// static variables and constants only here.
 
 	public static void main(String[] args) throws Exception {
 
+		ArrayList<String> input = new ArrayList<String>();
 		Scanner kb;	// input Scanner for commands
 		PrintStream ps;	// output file, for student testing and grading only
 		// If arguments are specified, reakarinasd/write from/to files instead of Std IO.
@@ -33,14 +35,48 @@ public class Main {
 			kb = new Scanner(System.in);// default input from Stdin
 			ps = System.out;			// default output to Stdout
 		}
-		initialize();
-		ArrayList<String> input;
-		input = parse(kb);
-		printLadder(getWordLadderDFS(input.get(0), input.get(1)));
+	
+		while (true){
+			input = parse(kb);
+			if (input.size() == 0){
+				break;
+			}
+			else{
+				printLadder(getWordLadderBFS(input.get(0), input.get(1)));
+				printLadder(getWordLadderDFS(input.get(0), input.get(1)));
+				while (! (kb.hasNext()) );
+			}
+		}
+			
+	
+		/*
+		
+		//testing using SampleTest.java
+		SampleTest s1 = new SampleTest();
+		
+		SampleTest.setUp();
+		
+		s1.testBFS1();
+		s1.testDFS1();
+		
+		s1.testBFS2();
+		s1.testDFS2();
+		*/
+		
+		//testing using WordLadderTester.java
+		/*WordLadderTester t1 = new WordLadderTester();
+		WordLadderTester.setUp();
+		
+		t1.testBFS1();
+		t1.testBFS2();
+		t1.testDFS1();
+		t1.testDFS2();
+		*/
+		
+		
 	}
 
 	public static void initialize() {
-
 
 		// initialize your static variables or constants here.
 		// We will call this method before running our JUNIT tests.  So call it 
@@ -54,17 +90,22 @@ public class Main {
 	 */
 	public static ArrayList<String> parse(Scanner keyboard) {
 		ArrayList<String> parsed = new ArrayList<String>();
+		
 		String input = keyboard.nextLine();
-
-		if(input.equals("/quit")){
-			return null;
+		if (input.contains("/quit")){
+			return parsed;
 		}
-
-		int i = input.indexOf(' ');
-		parsed.add(input.substring(0, i));
-		parsed.add(input.substring(i + 1, input.length()));
-
+		
+		Scanner input2 = new Scanner(input);
+		
+		while (input2.hasNext()){
+			parsed.add(input2.next());
+		}
+		
+		input2.close();
+					
 		return parsed;
+		
 	}
 
 	public static ArrayList<String> getWordLadderDFS(String start, String end) {
@@ -88,9 +129,20 @@ public class Main {
 	public static ArrayList<String> getWordLadderBFS(String start, String end) {
 
 		Set<String> dict = makeDictionary();
+		Helper h1 = new Helper(dict);
+		
+		
+		boolean valid = dict.contains(start.toUpperCase()) && dict.contains(end.toUpperCase());
+		if (!(valid)){
+			ArrayList<String> ret = new ArrayList<String>();
+			ret.add(start);
+			ret.add(end);
+			return ret;
+		}
+		List<String> cg = h1.buildCenterGroup(start, end);
 
-
-		return null; // replace this line later with real return
+		return Helper.buildAnsLadder(cg);
+		
 	}
 
 
@@ -99,7 +151,7 @@ public class Main {
 			System.out.println("no word ladder can be found between " + ladder.get(0) + " and " + ladder.get(1) + ".");
 		}
 		else{
-			System.out.println("a " + ladder.size() + "-rung word ladder exists between " + ladder.get(0) + " and " + ladder.get(ladder.size() - 1) + ".");
+			System.out.println("a " + (ladder.size()-2) + "-rung word ladder exists between " + ladder.get(0) + " and " + ladder.get(ladder.size() - 1) + ".");
 			for(int i = 0; i < ladder.size(); i++){
 				System.out.println(ladder.get(i));
 			}
