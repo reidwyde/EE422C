@@ -115,4 +115,34 @@ public class WordLadderTester {
 		String str = outContent.toString().replace("\n", "").replace(".", "").trim();
 		assertEquals("no word ladder can be found between twixt and hakus", str);
 	}
+	
+	
+	
+	@Test(timeout = 30000)
+	public void testBFS4() {
+		ArrayList<String> res = Main.getWordLadderBFS("mouse", "works");
+
+		if (res != null) {
+			HashSet<String> set = new HashSet<String>(res);
+			assertEquals(set.size(), res.size());
+		}
+		assertTrue(verifyLadder(res));
+		assertFalse(res == null || res.size() == 0 || res.size() == 2);
+		assertTrue(res.size() < 6);
+	}
+
+	@Test(timeout = 30000)
+	public void testDFS4() {
+		ArrayList<String> res = Main.getWordLadderDFS("mouse", "works");
+		if (res != null) {
+			HashSet<String> set = new HashSet<String>(res);
+			assertEquals(set.size(), res.size());
+		}
+		assertTrue(verifyLadder(res));
+		assertFalse(res == null || res.size() == 0 || res.size() == 2);
+
+	}
+	
+	
+	
 }

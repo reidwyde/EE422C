@@ -89,13 +89,11 @@ public class Main {
 	 * If command is /quit, return empty ArrayList. 
 	 */
 	public static ArrayList<String> parse(Scanner keyboard) {
+	
 		ArrayList<String> parsed = new ArrayList<String>();
 		
 		String input = keyboard.nextLine();
-		if (input.contains("/quit")){
-			return parsed;
-		}
-		
+	
 		Scanner input2 = new Scanner(input);
 		
 		while (input2.hasNext()){
@@ -103,6 +101,12 @@ public class Main {
 		}
 		
 		input2.close();
+	
+		if (parsed.contains("/quit")){
+			
+			ArrayList<String> parsed = new ArrayList<String>();
+			return parsed;
+		}
 					
 		return parsed;
 		

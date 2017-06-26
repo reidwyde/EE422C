@@ -1,7 +1,20 @@
+/* WORD LADDER Main.java
+ * EE422C Project 3 submission by
+ * Replace <...> with your actual data.
+ * Jose Camacho
+ * jac6493
+ * Reid Wyde
+ * raw3295
+ * <Student2 5-digit Unique No.>
+ * Slip days used: <0>
+ * Git URL: https://github.com/josecamacho8/EE422C/tree/master/Project/Project_3
+ * Summer 2017
+ */
 
 package assignment3;
 
 import static org.junit.Assert.assertEquals;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
